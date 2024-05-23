@@ -8,8 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IDbConnectionFactory>(_ =>
-    new SqliteConnectionFactory(
-        builder.Configuration.GetValue<string>("Database:ConnectionString")));
+    new SqliteConnectionFactory(builder.Configuration.GetValue<string>("Database:ConnectionString")!));
 builder.Services.AddSingleton<DatabaseInitializer>();
 builder.Services.AddEndpoints<Program>(builder.Configuration);
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();

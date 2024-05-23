@@ -1,21 +1,19 @@
-﻿using System;
+﻿using FluentAssertions;
+using Library.Api.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using FluentAssertions;
-using Library.Api.Models;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 namespace Library.Api.Tests.Integration;
 
-public class LibraryEndpointsTests
-    : IClassFixture<LibraryApiFactory>, IAsyncLifetime
+public class LibraryEndpointsTests : IClassFixture<LibraryApiFactory>, IAsyncLifetime
 {
     private readonly LibraryApiFactory _factory;
-    private readonly List<string> _createdIsbns = new();
+    private readonly List<string> _createdIsbns = [];
 
     public LibraryEndpointsTests(LibraryApiFactory factory)
     {
@@ -262,11 +260,7 @@ public class LibraryEndpointsTests
         };
     }
 
-    private string GenerateIsbn()
-    {
-        return $"{Random.Shared.Next(100, 999)}-" +
-               $"{Random.Shared.Next(1000000000, 2100999999)}";
-    }
+    private static string GenerateIsbn() => $"{Random.Shared.Next(100, 999)}-{Random.Shared.Next(1000000000, 2100999999)}";
 
     public Task InitializeAsync() => Task.CompletedTask;
 

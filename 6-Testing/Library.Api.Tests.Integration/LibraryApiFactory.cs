@@ -13,9 +13,7 @@ public class LibraryApiFactory : WebApplicationFactory<IApiMarker>
         builder.ConfigureServices(collection =>
         {
             collection.RemoveAll(typeof(IDbConnectionFactory));
-            collection.AddSingleton<IDbConnectionFactory>(_ =>
-                new SqliteConnectionFactory("DataSource=file:inmem?mode=memory&cache=shared"));
-
+            collection.AddSingleton<IDbConnectionFactory>(_ => new SqliteConnectionFactory("DataSource=file:inmem?mode=memory&cache=shared"));
         });
     }
 }

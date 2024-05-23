@@ -42,8 +42,7 @@ public class LibraryEndpoints : IEndpoints
             .WithTags(Tag);
     }
 
-    internal static async Task<IResult> CreateBookAsync(
-        Book book, IBookService bookService, IValidator<Book> validator)
+    internal static async Task<IResult> CreateBookAsync(Book book, IBookService bookService, IValidator<Book> validator)
     {
         var validationResult = await validator.ValidateAsync(book);
         if (!validationResult.IsValid)
@@ -63,8 +62,7 @@ public class LibraryEndpoints : IEndpoints
         return Results.Created($"/{BaseRoute}/{book.Isbn}", book);
     }
 
-    internal static async Task<IResult> GetAllBooksAsync(
-        IBookService bookService, string? searchTerm)
+    internal static async Task<IResult> GetAllBooksAsync(IBookService bookService, string? searchTerm)
     {
         if (searchTerm is not null && !string.IsNullOrWhiteSpace(searchTerm))
         {
@@ -76,16 +74,13 @@ public class LibraryEndpoints : IEndpoints
         return Results.Ok(books);
     }
 
-    internal static async Task<IResult> GetBookByIsbnAsync(
-        string isbn, IBookService bookService)
+    internal static async Task<IResult> GetBookByIsbnAsync(string isbn, IBookService bookService)
     {
         var book = await bookService.GetByIsbnAsync(isbn);
         return book is not null ? Results.Ok(book) : Results.NotFound();
     }
 
-    internal static async Task<IResult> UpdateBookAsync(
-        string isbn, Book book, IBookService bookService,
-        IValidator<Book> validator)
+    internal static async Task<IResult> UpdateBookAsync(string isbn, Book book, IBookService bookService, IValidator<Book> validator)
     {
         book.Isbn = isbn;
         var validationResult = await validator.ValidateAsync(book);
@@ -98,8 +93,7 @@ public class LibraryEndpoints : IEndpoints
         return updated ? Results.Ok(book) : Results.NotFound();
     }
 
-    internal static async Task<IResult> DeleteBookAsync(
-        string isbn, IBookService bookService)
+    internal static async Task<IResult> DeleteBookAsync(string isbn, IBookService bookService)
     {
         var deleted = await bookService.DeleteAsync(isbn);
         return deleted ? Results.NoContent() : Results.NotFound();
