@@ -1,0 +1,8 @@
+﻿{
+  "Isbn": "978-3-16-148410-0",
+  "Title": "Example Book Title",
+  "Author": "John Doe",
+  "ShortDescription": "This is a short description of the example book.",
+  "PageCount": 350,
+  "ReleaseDate": "2023-05-23T00:00:00Z"
+}
