@@ -34,10 +34,22 @@ app.MapGet("/weatherforecast", () =>
             summaries[Random.Shared.Next(summaries.Length)]
         ))
         .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+
+    return Results.Ok(forecast);
+});
+  //.WithName("GetWeather")
+  //  .Accepts<WeatherForecast>("application/json")
+  //  .Produces<WeatherForecast>(200)
+  //  .WithTags("Weather");
+
+app.MapPost("/weatherforecast", (WeatherForecast forecast) =>
+{
+    return Results.Created();
+});
+  //.WithName("CreateWeather")
+  //  .Accepts<WeatherForecast>("application/json")
+  //  .Produces<WeatherForecast>(201)
+  //  .WithTags("Weather");
 
 app.Run();
 

@@ -16,11 +16,4 @@ app.MapGet("", () =>
 });
 
 
-// Pøedstavit route parametry, query parametry, atributy FromRoute, FromQuery, FromHeader
-
-app.MapGet("books/{isbn:int}", (int isbn) =>
-{
-    return Results.Ok();
-});
-
 app.Run();
